@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<script>
+
+class ChessBoard {
+  constructor() {
+    this.board = this.#buildChessBoard();
+    this.board.forEach(line => line.forEach(square => this.#findKnightMoves(square)));
+  }
+  #buildChessBoard() {
+    const board = [];
+    for (let i = 0; i < 8; i++) {
+      const temp = [];
+      board.push(temp);
+      for (let j = 0; j < 8; j++) {
+        temp.push(new ChessSquare(i, j));
+      }
+    }
+    return board;
+  }
+  #findKnightMoves(square) {
+    const [x, y] = [square.x, square.y];
+    if (this.board[x + 1] !== undefined) if (this.board[x + 1][y + 2] !== undefined) square.knightMoves.push(this.board[x + 1][y + 2]);
+    if (this.board[x + 2] !== undefined) if (this.board[x + 2][y + 1] !== undefined) square.knightMoves.push(this.board[x + 2][y + 1]);
+    if (this.board[x + 2] !== undefined) if (this.board[x + 2][y - 1] !== undefined) square.knightMoves.push(this.board[x + 2][y - 1]);
+    if (this.board[x + 1] !== undefined) if (this.board[x + 1][y - 2] !== undefined) square.knightMoves.push(this.board[x + 1][y - 2]);
+    if (this.board[x - 1] !== undefined) if (this.board[x - 1][y - 2] !== undefined) square.knightMoves.push(this.board[x - 1][y - 2]);
+    if (this.board[x - 2] !== undefined) if (this.board[x - 2][y - 1] !== undefined) square.knightMoves.push(this.board[x - 2][y - 1]);
+    if (this.board[x - 2] !== undefined) if (this.board[x - 2][y + 1] !== undefined) square.knightMoves.push(this.board[x - 2][y + 1]);
+    if (this.board[x - 1] !== undefined) if (this.board[x - 1][y + 2] !== undefined) square.knightMoves.push(this.board[x - 1][y + 2]);
+  }
+
+  show() {
+    console.log(this.board);
+  }
+}
+
+class ChessSquare {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.knightMoves = [];
+  }
+}
+
+const b = new ChessBoard();
+b.show()
+
+</script>
+</body>
+</html>
