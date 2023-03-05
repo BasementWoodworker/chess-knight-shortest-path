@@ -36,9 +36,20 @@ class ChessBoard {
     if (this.board[x - 2] !== undefined) if (this.board[x - 2][y + 1] !== undefined) square.knightMoves.push(this.board[x - 2][y + 1]);
     if (this.board[x - 1] !== undefined) if (this.board[x - 1][y + 2] !== undefined) square.knightMoves.push(this.board[x - 1][y + 2]);
   }
-
   show() {
     console.log(this.board);
+  }
+  graphTraversal() {
+    const visited = [];
+    function visit(square) {
+      console.log(square);
+      visited.push(square);
+      square.knightMoves.forEach(option => {
+        if (visited.indexOf(option) !== -1) return;
+        else visit(option);
+      })
+    }
+    visit(this.board[0][0]);
   }
 }
 
